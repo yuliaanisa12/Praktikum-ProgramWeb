@@ -2,41 +2,88 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>SIMPUS-Mini | Beranda</title>
+    <title>SIMPUS-Mini | Daftar Buku</title>
 </head>
 <body>
     <header>
         <h1>SIMPUS-Mini</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Beranda</a></li>
-                <li><a href="buku/list.html">Daftar Buku</a></li>
-                <li><a href="buku/tambah.html">Tambah Buku</a></li>
-                <li><a href="anggota/list.html">Daftar Anggota</a></li>
+                <li><a href="../index.html">Beranda</a></li>
+                <li><a href="list.html">Daftar Buku</a></li>
+                <li><a href="tambah.html">Tambah Buku</a></li>
+                <li><a href="../anggota/list.html">Daftar Anggota</a></li>
+                <li><a href="../anggota/tambah.html">Tambah Anggota</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
         <section>
-            <h2>Selamat Datang di Sistem Perpustakaan Mini</h2>
-            <p>Aplikasi sederhana untuk mengelola data buku dan anggota perpustakaan.</p>
-        </section>
-
-        <section>
-            <h2>Ringkasan</h2>
-            <article>
-                <h3>Total Buku</h3>
-                <p>12</p>
-            </article>
-            <article>
-                <h3>Total Anggota</h3>
-                <p>8</p>
-            </article>
-            <article>
-                <h3>Sedang Dipinjam</h3>
-                <p>3</p>
-            </article>
+            <h2>Daftar Buku</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Judul</th>
+                        <th>Pengarang</th>
+                        <th>Tahun</th>
+                        <th>ISBN</th>
+                        <th>Stok</th>
+                        <th>Kategori</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Laskar Pelangi</td>
+                        <td>Andrea Hirata</td>
+                        <td>2005</td>
+                        <td>978-111</td>
+                        <td>5</td>
+                        <td>Fiksi</td>
+                        <td>
+                            <button type="button">Edit</button>
+                            <button type="button">Hapus</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Bumi Manusia</td>
+                        <td>Pramoedya Ananta Toer</td>
+                        <td>1980</td>
+                        <td>978-222</td>
+                        <td>3</td>
+                        <td>Fiksi</td>
+                        <td>
+                            <button type="button">Edit</button>
+                            <button type="button">Hapus</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Sapiens</td>
+                        <td>Yuval Noah Harari</td>
+                        <td>2011</td>
+                        <td>978-333</td>
+                        <td>7</td>
+                        <td>Non-Fiksi</td>
+                        <td>
+                            <button type="button">Edit</button>
+                            <button type="button">Hapus</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Negeri 5 Menara</td>
+                        <td>Ahmad Fuadi</td>
+                        <td>2009</td>
+                        <td>978-444</td>
+                        <td>4</td>
+                        <td>Fiksi</td>
+                        <td>
+                            <button type="button">Edit</button>
+                            <button type="button">Hapus</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
     </main>
 
