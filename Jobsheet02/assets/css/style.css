@@ -11,7 +11,7 @@ body {
     line-height: 1.5;
 }
 a {
-    color: #1d5b8a;
+    color: #1d6b3a;
     text-decoration: none;
 }
 a:hover {
@@ -19,7 +19,7 @@ a:hover {
 }
 /* ===== Header & Navbar (Flexbox) ===== */
 header {
-    background-color: #1d5b8a;
+    background-color: #1d6b3a;
     color: #fff;
     padding: 1rem 1.5rem;
     display: flex;
@@ -54,12 +54,12 @@ section {
 }
 section h2 {
     margin-bottom: 1rem;
-    color: #1d5b8a;
+    color: #1d6b3a;
 }
 /* ===== Kartu Statistik (CSS Grid) ===== */
 main section:nth-of-type(2) {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
 }
 main section:nth-of-type(2) h2 {
@@ -80,7 +80,7 @@ main section:nth-of-type(2) article h3 {
 main section:nth-of-type(2) article p {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #1d5b8a;
+    color: #1d6b3a;
 }
 /* ===== Tabel ===== */
 table {
@@ -93,7 +93,7 @@ th, td {
     border-bottom: 1px solid #e2e6ea;
 }
 thead {
-    background-color: #1d5b8a;
+    background-color: #1d6b3a;
     color: #fff;
 }
 tbody tr:nth-child(even) {
@@ -110,11 +110,15 @@ td button {
     cursor: pointer;
     font-size: 0.85rem;
 }
-td button:first-of-type {
+.btn-edit {
     background-color: #f0ad4e;
     color: #fff;
 }
-td button:last-of-type {
+.btn-detail {
+    background-color: #5bc0de;
+    color: #fff;
+}
+.btn-hapus {
     background-color: #d9534f;
     color: #fff;
 }
@@ -138,7 +142,7 @@ form select {
     font-size: 1rem;
 }
 form button[type="submit"] {
-    background-color: #1d5b8a;
+    background-color: #1d6b3a;
     color: #fff;
     border: none;
     padding: 0.6rem 1.5rem;
