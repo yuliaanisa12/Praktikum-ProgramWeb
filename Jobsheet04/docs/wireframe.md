@@ -72,7 +72,7 @@ Wireframe Form Peminjaman
 | Anggota : [ Pilih Anggota ▼ ]        |
 |                                      |
 | Buku    : [ Pilih Buku ▼ ]           |
-|           (stok tersedia)             |
+|           (stok tersedia)            |
 |                                      |
 | Tanggal Pinjam : [ Hari Ini ]        |
 |                                      |
@@ -88,7 +88,7 @@ Wireframe Form Pengembalian
 | [ nama anggota / judul buku _____ ]  |
 |                                      |
 | Anggota | Buku | Tgl Pinjam |        |
-|                         [Kembalikan]  |
+|                         [Kembalikan] |
 +--------------------------------------+
 
 Wireframe Riwayat Peminjaman
@@ -110,3 +110,75 @@ Aktor Sistem
 | ----------- | ------------------------------------------------------------ |
 | **Tamu**    | Melihat katalog buku dan daftar buku                         |
 | **Petugas** | Login, mengelola buku, anggota, peminjaman, dan pengembalian |
+
+Wireframe Registrasi Anggota Baru 
++--------------------------------------+
+|          SIMPUS-Mini                 |
+|--------------------------------------|
+|                                      |
+|     REGISTRASI ANGGOTA BARU          |
+|                                      |
+| Nama        : [________________]     |
+| Email       : [________________]     |
+| No. Telepon : [________________]     |
+| Alamat      : [________________]     |
+| Password    : [________________]     |
+| Konfirmasi  : [________________]     |
+| Password                             |
+|                                      |
+|          [ DAFTAR ]   [ BATAL ]      |
+|                                      |
+| Sudah punya akun? Login di sini      |
++--------------------------------------+
+
+User Flow Petugas Mencari Anggota dengan Tunggakan
+
+[Petugas Login]
+       |
+       v
+   [Dashboard]
+       |
+       v
+ [Menu Anggota]
+       |
+       v
+ [Cari Anggota]
+       |
+       v
+ [Pilih Anggota]
+       |
+       v
+ [Cek Tunggakan]
+       |
+       v
+[Apakah ada tunggakan?]
+       |
+      / \
+    Ya   Tidak
+    |      |
+    v      v
+[Apakah sudah     [Tampilkan status
+ lewat jatuh       tidak ada tunggakan]
+ tempo?]
+    |
+   / \
+ Ya   Tidak
+ |      |
+ v      v
+[Tampilkan      [Tampilkan status
+ status          masih dalam
+ terlambat]      batas waktu]
+
+ Edge Case
+
+Kasus:
+Petugas mencoba meminjamkan buku yang sama kepada
+anggota yang sama dua kali berturut-turut.
+
+Kondisi:
+Buku masih berstatus "Dipinjam" oleh anggota tersebut.
+
+Penanganan:
+Sistem harus menolak peminjaman kedua dan menampilkan
+pesan bahwa buku tersebut masih sedang dipinjam oleh
+anggota tersebut.
