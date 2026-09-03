@@ -181,11 +181,19 @@ footer {
 .table-responsive {
     overflow-x: auto;
 }
+.code-responsive {
+    overflow-x: auto;
+    max-width: 100%;
+}
+.code-responsive pre {
+    margin: 0;
+    white-space: pre;
+}
 
 /* ===== Responsive Breakpoints ===== */
 
 /* Tablet ke bawah */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     main section:nth-of-type(2) {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -224,5 +232,10 @@ footer {
     form input,
     form select {
         max-width: 100%;
+    }
+}
+@media (min-width: 1400px) {
+    main {
+        max-width: 1300px;
     }
 }
