@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <title>Daftar Buku | SIMPUS-Mini</title>
+</head>
+
+<body>
+
+    <header>
+
+        <h1>SIMPUS-Mini</h1>
+
+        <button type="button"
+                id="nav-toggle-btn"
+                class="nav-toggle-label"
+                aria-label="Menu">
+            &#9776;
+        </button>
+
+        <nav>
+            <ul>
+
+                <li>
+                    <a href="../index.html">
+                        Beranda
+                    </a>
+                </li>
+
+                <li>
+                    <a href="list.html">
+                        Daftar Buku
+                    </a>
+                </li>
+
+                <li>
+                    <a href="tambah.html">
+                        Tambah Buku
+                    </a>
+                </li>
+
+                <li>
+                    <a href="../anggota/list.html">
+                        Daftar Anggota
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <section>
+
+            <h2>Daftar Buku</h2>
+
+
+            <p>
+                <a href="tambah.html" class="btn-tambah">
+                    + Tambah Buku
+                </a>
+            </p>
+
+
+            <p>
+                <input
+                    type="text"
+                    id="search-input"
+                    placeholder="Cari buku...">
+            </p>
+
+
+            <div class="table-responsive">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Judul</th>
+                            <th>Pengarang</th>
+                            <th>Tahun</th>
+                            <th>Stok</th>
+                            <th>Kategori</th>
+                            <th>Aksi</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <tr>
+                            <td>
+                                Pemrograman Web
+                            </td>
+
+                            <td>
+                                Dimas
+                            </td>
+
+                            <td>
+                                2024
+                            </td>
+
+                            <td>
+                                5
+                            </td>
+
+                            <td>
+                                Fiksi
+                            </td>
+
+                            <td>
+                                <button
+                                    type="button"
+                                    class="btn-hapus">
+                                    Hapus
+                                </button>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                Dasar HTML dan CSS
+                            </td>
+
+                            <td>
+                                Andi
+                            </td>
+
+                            <td>
+                                2023
+                            </td>
+
+                            <td>
+                                3
+                            </td>
+
+                            <td>
+                                Referensi
+                            </td>
+
+                            <td>
+                                <button
+                                    type="button"
+                                    class="btn-hapus">
+                                    Hapus
+                                </button>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                JavaScript Dasar
+                            </td>
+
+                            <td>
+                                Budi
+                            </td>
+
+                            <td>
+                                2025
+                            </td>
+
+                            <td>
+                                4
+                            </td>
+
+                            <td>
+                                Non-Fiksi
+                            </td>
+
+                            <td>
+                                <button
+                                    type="button"
+                                    class="btn-hapus">
+                                    Hapus
+                                </button>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                Basis Data
+                            </td>
+
+                            <td>
+                                Sinta
+                            </td>
+
+                            <td>
+                                2022
+                            </td>
+
+                            <td>
+                                6
+                            </td>
+
+                            <td>
+                                Referensi
+                            </td>
+
+                            <td>
+                                <button
+                                    type="button"
+                                    class="btn-hapus">
+                                    Hapus
+                                </button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            &copy; 2026 SIMPUS-Mini &mdash; Jobsheet 5
+        </p>
+
+    </footer>
+
+
+    <script src="../assets/js/app.js"></script>
+
+</body>
+
+</html>
