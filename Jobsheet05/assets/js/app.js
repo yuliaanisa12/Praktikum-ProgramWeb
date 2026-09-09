@@ -1,5 +1,6 @@
 // ===== Hamburger menu (JS-driven, menggantikan checkbox hack) =====
 function initNavToggle() {
+
     const toggleBtn = document.getElementById("nav-toggle-btn");
     const nav = document.querySelector("header nav");
 
@@ -13,6 +14,7 @@ function initNavToggle() {
 
 // ===== Konfirmasi hapus (front-end only, belum ke server) =====
 function initHapusConfirm() {
+
     document.querySelectorAll(".btn-hapus").forEach(function (btn) {
 
         btn.addEventListener("click", function () {
@@ -45,22 +47,78 @@ function initTableFilter() {
 
     if (!input || !table) return;
 
-    input.addEventListener("keyup", function () {
+    const rows = table.querySelectorAll("tbody tr");
+
+    // ===== Counter tabel =====
+    const countInfo = document.createElement("p");
+
+    countInfo.id = "table-count";
+    countInfo.className = "table-count";
+
+    table.parentElement.insertBefore(countInfo, table);
+
+
+    // ===== Fungsi pencarian dan counter =====
+    function updateTable() {
 
         const keyword = input.value.toLowerCase();
 
-        const rows = table.querySelectorAll("tbody tr");
+        let jumlahTampil = 0;
 
         rows.forEach(function (row) {
 
-            const teks = row.textContent.toLowerCase();
+            // Pencarian hanya kolom pertama
+            const teks =
+                row.querySelector("td:first-child")?.textContent.toLowerCase() || "";
 
-            row.style.display =
-                teks.includes(keyword) ? "" : "none";
+            if (teks.includes(keyword)) {
+
+                row.style.display = "";
+
+                jumlahTampil++;
+
+            } else {
+
+                row.style.display = "none";
+
+            }
 
         });
 
-    });
+
+        const jumlahTotal = rows.length;
+
+
+        // ===== Menentukan buku atau anggota =====
+        if (input.placeholder.toLowerCase().includes("anggota")) {
+
+            countInfo.textContent =
+                "Menampilkan " +
+                jumlahTampil +
+                " dari " +
+                jumlahTotal +
+                " anggota";
+
+        } else {
+
+            countInfo.textContent =
+                "Menampilkan " +
+                jumlahTampil +
+                " dari " +
+                jumlahTotal +
+                " buku";
+
+        }
+
+    }
+
+
+    // Menjalankan pencarian ketika mengetik
+    input.addEventListener("keyup", updateTable);
+
+    // Menampilkan counter saat halaman pertama dibuka
+    updateTable();
+
 }
 
 
@@ -85,7 +143,9 @@ function hapusError(input) {
     const next = input.nextElementSibling;
 
     if (next && next.classList.contains("error")) {
+
         next.remove();
+
     }
 
 }
@@ -103,59 +163,53 @@ function initValidasiForm() {
         let valid = true;
 
 
-        // ===== Validasi judul buku / nama anggota =====
-        const judul = form.querySelector(
-            "[name='judul'], [name='nama']"
-        );
+        // ===== Daftar field yang wajib divalidasi =====
+        const fieldWajib = [
 
-        if (judul && judul.value.trim() === "") {
+            {
+                selector: "[name='judul'], [name='nama']",
+                pesan: "Field ini wajib diisi."
+            },
 
-            tampilkanError(
-                judul,
-                "Field ini wajib diisi."
-            );
+            {
+                selector: "[name='pengarang']",
+                pesan: "Pengarang wajib diisi."
+            }
 
-            valid = false;
-
-        } else if (judul) {
-
-            hapusError(judul);
-
-        }
+        ];
 
 
-        // ===== Validasi pengarang =====
-        const pengarang = form.querySelector(
-            "[name='pengarang']"
-        );
+        // ===== Validasi menggunakan forEach =====
+        fieldWajib.forEach(function (item) {
 
-        if (pengarang && pengarang.value.trim() === "") {
+            const input = form.querySelector(item.selector);
 
-            tampilkanError(
-                pengarang,
-                "Pengarang wajib diisi."
-            );
+            if (!input) return;
 
-            valid = false;
+            if (input.value.trim() === "") {
 
-        } else if (pengarang) {
+                tampilkanError(
+                    input,
+                    item.pesan
+                );
 
-            hapusError(pengarang);
+                valid = false;
 
-        }
+            } else {
+
+                hapusError(input);
+
+            }
+
+        });
 
 
         // ===== Validasi tahun =====
-        const tahun = form.querySelector(
-            "[name='tahun']"
-        );
+        const tahun = form.querySelector("[name='tahun']");
 
         if (tahun) {
 
-            const nilai = parseInt(
-                tahun.value,
-                10
-            );
+            const nilai = parseInt(tahun.value, 10);
 
             if (
                 isNaN(nilai) ||
@@ -180,16 +234,11 @@ function initValidasiForm() {
 
 
         // ===== Validasi stok =====
-        const stok = form.querySelector(
-            "[name='stok']"
-        );
+        const stok = form.querySelector("[name='stok']");
 
         if (stok) {
 
-            const nilai = parseInt(
-                stok.value,
-                10
-            );
+            const nilai = parseInt(stok.value, 10);
 
             if (
                 isNaN(nilai) ||
@@ -212,9 +261,36 @@ function initValidasiForm() {
         }
 
 
+        // ===== Validasi ISBN =====
+        const isbn = form.querySelector("[name='isbn']");
+
+        if (isbn && isbn.value.trim() !== "") {
+
+            const polaISBN = /^[0-9-]+$/;
+
+            if (!polaISBN.test(isbn.value.trim())) {
+
+                tampilkanError(
+                    isbn,
+                    "ISBN hanya boleh berisi angka dan tanda hubung (-)."
+                );
+
+                valid = false;
+
+            } else {
+
+                hapusError(isbn);
+
+            }
+
+        }
+
+
         // ===== Jika tidak valid =====
         if (!valid) {
+
             e.preventDefault();
+
         }
 
     });

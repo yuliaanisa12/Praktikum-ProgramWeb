@@ -214,6 +214,13 @@ header nav.nav-open {
     margin-top: 0.25rem;
 }
 
+/* ===== Table Count Jobsheet 5 ===== */
+.table-count {
+    margin-bottom: 0.75rem;
+    color: #55677a;
+    font-size: 0.9rem;
+}
+
 /* ===== Table Responsive (Wrapper) ===== */
 .table-responsive {
     overflow-x: auto;
@@ -233,51 +240,84 @@ header nav.nav-open {
 
 /* Tablet ke bawah */
 @media (max-width: 900px) {
+
     main section:nth-of-type(2) {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-/* Mobile */
+/* ===== Mobile ===== */
 @media (max-width: 480px) {
 
     header {
         position: relative;
     }
 
+    /* Tombol hamburger ditampilkan */
     .nav-toggle-label {
         display: block;
+        font-size: 1.6rem;
+        color: #fff;
+        cursor: pointer;
+        background: none;
+        border: none;
     }
 
+    /* Menu awalnya tersembunyi */
     header nav {
-        display: none;
+        display: block;
         width: 100%;
         order: 3;
-        margin-top: 1rem;
+        margin-top: 0;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(-8px);
+        transition:
+            max-height 0.35s ease,
+            opacity 0.25s ease,
+            transform 0.35s ease;
+        pointer-events: none;
     }
 
-    /* Jobsheet 5: menu dibuka menggunakan JavaScript */
+    /* Menu saat tombol hamburger diklik */
     header nav.nav-open {
         display: block;
+        margin-top: 1rem;
+        max-height: 300px;
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
     }
 
+    /* Menu menjadi vertikal */
     header nav ul {
         flex-direction: column;
         gap: 0.75rem;
     }
 
+    /* Statistik menjadi satu kolom */
     main section:nth-of-type(2) {
         grid-template-columns: 1fr;
     }
 
+    /* Form memenuhi layar */
     form input,
     form select {
         max-width: 100%;
     }
 }
 
+/* ===== Layar besar ===== */
 @media (min-width: 1400px) {
+
     main {
         max-width: 1300px;
     }
+}
+/* ===== Counter Tabel ===== */
+.table-count {
+    margin-bottom: 0.75rem;
+    color: #55677a;
+    font-size: 0.9rem;
 }
