@@ -22,6 +22,8 @@ function initHapusConfirm() {
 
     document.addEventListener("click", function (e) {
 
+        console.log(e.target);
+
         const btn = e.target.closest(".btn-hapus");
 
         if (!btn) return;
