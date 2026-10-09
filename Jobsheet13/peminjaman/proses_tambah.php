@@ -98,33 +98,32 @@ try {
             'Anggota tidak ditemukan.'
         );
     }
+
     // Cek apakah anggota memiliki peminjaman
-// yang sudah terlambat lebih dari 14 hari
-$stmtTerlambat = $pdo->prepare(
-    "SELECT id, tanggal_pinjam
-     FROM peminjaman
-     WHERE anggota_id = :anggota_id
-       AND status = 'dipinjam'
-       AND CURRENT_DATE - tanggal_pinjam > 14
-     LIMIT 1"
-);
-
-$stmtTerlambat->execute([
-    'anggota_id' => $anggota_id
-]);
-
-$dataTerlambat = $stmtTerlambat->fetch(PDO::FETCH_ASSOC);
-
-
-// Jika ada peminjaman terlambat,
-// batalkan proses peminjaman baru
-if ($dataTerlambat) {
-
-    throw new Exception(
-        'Anggota tidak dapat meminjam buku baru karena memiliki peminjaman yang terlambat lebih dari 14 hari.'
+    // yang terlambat lebih dari 14 hari
+    $stmtTerlambat = $pdo->prepare(
+        "SELECT id, tanggal_jatuh_tempo,
+                CURRENT_DATE - tanggal_jatuh_tempo AS hari_terlambat
+         FROM peminjaman
+         WHERE anggota_id = :anggota_id
+           AND status = 'dipinjam'
+           AND tanggal_kembali IS NULL
+           AND CURRENT_DATE - tanggal_jatuh_tempo > 14
+         LIMIT 1"
     );
-}
 
+    $stmtTerlambat->execute([
+        'anggota_id' => $anggota_id
+    ]);
+
+    $dataTerlambat = $stmtTerlambat->fetch(PDO::FETCH_ASSOC);
+
+    // Jika anggota terlambat, tolak peminjaman baru
+    if ($dataTerlambat) {
+        throw new Exception(
+            'Peminjaman ditolak. Anggota memiliki buku yang terlambat lebih dari 14 hari.'
+        );
+    }
 
     // Tanggal jatuh tempo
     // 7 hari dari tanggal peminjaman

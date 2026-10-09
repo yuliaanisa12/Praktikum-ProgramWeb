@@ -1,4 +1,4 @@
-```php
+
 <?php
 require __DIR__ . '/../includes/auth.php';
 $page_title = "Pengembalian Buku";
@@ -97,4 +97,3 @@ $daftarAktif = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </section>
 
 <?php include __DIR__ . '/../includes/footer.php'; ?>
-```
