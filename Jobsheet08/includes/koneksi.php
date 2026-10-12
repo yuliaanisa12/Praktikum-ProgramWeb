@@ -1,8 +1,8 @@
 <?php
 
-$host = "localhost";
+$host = "127.0.0.1";
 $port = "5432";
-$db   = "Simpus_mini";
+$db   = "simpus_mini";
 $user = "postgres";
 $pass = "123456";
 
@@ -13,7 +13,10 @@ try {
         $pass
     );
 
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo->setAttribute(
+        PDO::ATTR_ERRMODE,
+        PDO::ERRMODE_EXCEPTION
+    );
 
 } catch (PDOException $e) {
     die("Koneksi database gagal: " . $e->getMessage());

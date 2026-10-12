@@ -1,53 +1,29 @@
 <?php
-
 $page_title = "Beranda";
-
+include __DIR__ . '/includes/header.php';
 require __DIR__ . '/includes/koneksi.php';
 
-$totalBuku = $pdo->query(
-    "SELECT COUNT(*) FROM public.buku"
-)->fetchColumn();
-
-$totalAnggota = $pdo->query(
-    "SELECT COUNT(*) FROM public.anggota"
-)->fetchColumn();
-
-include __DIR__ . '/includes/header.php';
-
+$totalBuku = $pdo->query("SELECT COUNT(*) FROM buku")->fetchColumn();
+$totalAnggota = $pdo->query("SELECT COUNT(*) FROM anggota")->fetchColumn();
 ?>
+        <section>
+            <h2>Selamat Datang di Sistem Perpustakaan Mini</h2>
+            <p>Aplikasi sederhana untuk mengelola data buku dan anggota perpustakaan.</p>
+        </section>
 
-<section>
-
-    <h2>Beranda</h2>
-
-    <p>
-        Selamat datang di SIMPUS-Mini.
-    </p>
-
-    <div class="stats">
-
-        <div class="stat-card">
-
-            <h3>
-                <?= $totalBuku; ?>
-            </h3>
-
-            <p>Total Buku</p>
-
-        </div>
-
-        <div class="stat-card">
-
-            <h3>
-                <?= $totalAnggota; ?>
-            </h3>
-
-            <p>Total Anggota</p>
-
-        </div>
-
-    </div>
-
-</section>
-
+        <section>
+            <h2>Ringkasan</h2>
+            <article>
+                <h3>Total Buku</h3>
+                <p><?php echo $totalBuku; ?></p>
+            </article>
+            <article>
+                <h3>Total Anggota</h3>
+                <p><?php echo $totalAnggota; ?></p>
+            </article>
+            <article>
+                <h3>Sedang Dipinjam</h3>
+                <p>0</p>
+            </article>
+        </section>       
 <?php include __DIR__ . '/includes/footer.php'; ?>

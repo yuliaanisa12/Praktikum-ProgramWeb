@@ -1,22 +1,35 @@
 <?php
-$host = "localhost";
-$port = "5432";
-$db   = "simpus_mini";
-$user = "postgres";
-$pass = "12345678";
+$page_title = "Beranda";
+include __DIR__ . '/includes/header.php';
 
-try {
-    $pdo = new PDO(
-        "pgsql:host=$host;port=$port;dbname=$db",
-        $user,
-        $pass
-    );
+$totalBuku = count($_SESSION['buku'] ?? []);
+$totalAnggota = count($_SESSION['anggota'] ?? []);
+?>
+<section>
+    <h2>Selamat Datang di Sistem Perpustakaan Mini</h2>
+    <p>Aplikasi sederhana untuk mengelola data buku dan anggota perpustakaan.</p>
+</section>
+<section>
+    <h2>Ringkasan</h2>
+    <article>
+        <h3>Total Buku</h3>
+        <p><?php echo $totalBuku; ?></p>
+    </article>
+    <article>
+        <h3>Total Anggota</h3>
+        <p><?php echo $totalAnggota; ?></p>
+    </article>
+    <article>
+        <h3>Sedang Dipinjam</h3>
+        <p>0</p>
+    </article>
+    <p style="margin-top: 1rem;">
+        <a href="reset.php"
+            onclick="return confirm('Yakin ingin menghapus semua data session?');">
+            Reset Data
+        </a>
+    </p>
 
-    $pdo->setAttribute(
-        PDO::ATTR_ERRMODE,
-        PDO::ERRMODE_EXCEPTION
-    );
 
-} catch (PDOException $e) {
-    die("Koneksi database gagal: " . $e->getMessage());
-}
+</section>
+<?php include __DIR__ . '/includes/footer.php'; ?>

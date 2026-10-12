@@ -1,0 +1,1 @@
+<?php try { $pdo = new PDO("pgsql:host=127.0.0.1;port=5432;dbname=simpus_mini", "postgres", "123456"); echo "Koneksi PHP berhasil!"; } catch (PDOException $e) { echo "Gagal: " . $e->getMessage(); }
