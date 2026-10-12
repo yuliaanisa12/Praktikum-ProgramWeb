@@ -160,3 +160,10 @@ footer {
     color: #7a8794;
     font-size: 0.9rem;
 }
+
+
+/* Menghilangkan checkbox dan ikon hamburger */
+.nav-toggle,
+.nav-toggle-label {
+    display: none !important;
+}
