@@ -1,18 +1,20 @@
-// Mengambil dan menampilkan daftar buku dari data/buku.json
+
+ // Mengambil dan menampilkan daftar buku dari data/buku.json
 
 async function muatDaftarBuku() {
-
     const tbody = document.querySelector(".table-responsive table tbody");
     const loading = document.getElementById("loading-indicator");
 
     if (!tbody) return;
 
-    loading.style.display = "block";
+    if (loading) {
+        loading.style.display = "block";
+    }
+
     tbody.innerHTML = "";
 
     try {
-
-        // simulasi delay jaringan
+        // Simulasi delay jaringan
         await new Promise((resolve) => setTimeout(resolve, 300));
 
         const res = await fetch("../data/buku.json");
@@ -25,45 +27,42 @@ async function muatDaftarBuku() {
 
         const daftarBuku = await res.json();
 
-        daftarBuku.forEach(function (buku) {
-
+        daftarBuku.forEach(function (buku, index) {
             const tr = document.createElement("tr");
 
-            tr.innerHTML =
-                "<td>" + buku.judul + "</td>" +
-                "<td>" + buku.pengarang + "</td>" +
-                "<td>" + buku.tahun + "</td>" +
-                "<td>" + buku.stok + "</td>" +
-                "<td>" + buku.kategori + "</td>" +
-                "<button type=\"button\">Edit</button> " +
-                "<button type=\"button\" class=\"btn-hapus\">Hapus</button>" +
-                "</td>";
+            tr.innerHTML = `
+                <td>${buku.judul}</td>
+                <td>${buku.pengarang}</td>
+                <td>${buku.tahun}</td>
+                <td>${buku.stok}</td>
+                <td>${buku.kategori}</td>
+                <td>
+                    <button type="button" class="btn-edit"
+                        data-index="${index}">Edit</button>
+                    <button type="button" class="btn-hapus"
+                        data-index="${index}">Hapus</button>
+                </td>
+            `;
 
             tbody.appendChild(tr);
-
         });
 
     } catch (err) {
-
         tbody.innerHTML =
-            "<tr><td colspan=\"5\">Gagal memuat data: " +
-            err.message +
-            "</td></tr>";
-
+            `<tr><td colspan="6">Gagal memuat data: ${err.message}</td></tr>`;
     } finally {
-
-        loading.style.display = "none";
-
+        if (loading) {
+            loading.style.display = "none";
+        }
     }
 }
 
-document.addEventListener( "DOMContentLoaded",muatDaftarBuku
-);
+document.addEventListener("DOMContentLoaded", function () {
+    muatDaftarBuku();
 
-const btnMuatUlang = document.getElementById("btn-muat-ulang");
+    const btnMuatUlang = document.getElementById("btn-muat-ulang");
 
-if (btnMuatUlang) {
-    btnMuatUlang.addEventListener("click", muatDaftarBuku);
-
-    muatData("../data/buku.json");
-}
+    if (btnMuatUlang) {
+        btnMuatUlang.addEventListener("click", muatDaftarBuku);
+    }
+});

@@ -321,3 +321,36 @@ header nav.nav-open {
     color: #55677a;
     font-size: 0.9rem;
 }
+
+/* Tombol Edit warna kuning */
+.btn-edit {
+    background-color: #f0ad4e;
+    color: #ffffff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-edit:hover {
+    background-color: #ec971f;
+}
+
+/* Tombol Hapus warna merah */
+.btn-hapus {
+    background-color: #d9534f;
+    color: #ffffff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-hapus:hover {
+    background-color: #c9302c;
+}
