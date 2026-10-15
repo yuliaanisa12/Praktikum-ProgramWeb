@@ -1,5 +1,4 @@
-/* ===== RESET & BASE ===== */
-
+/* ===== Reset & Base ===== */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -22,11 +21,9 @@ a:hover {
     text-decoration: underline;
 }
 
-
-/* ===== HEADER ===== */
-
+/* ===== Header & Navbar (Flexbox) ===== */
 header {
-    background-color: #4caf7d;
+    background-color: #1d5b8a;
     color: #fff;
     padding: 1rem 1.5rem;
     display: flex;
@@ -43,7 +40,6 @@ header nav ul {
     list-style: none;
     display: flex;
     gap: 1.25rem;
-    align-items: center;
 }
 
 header nav a {
@@ -51,21 +47,18 @@ header nav a {
     font-weight: 500;
 }
 
-.auth-status {
+auth-status {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    color: #fff;
+    gap: 1rem;
 }
 
 .auth-status a {
     color: #fff;
-    text-decoration: underline;
+    font-weight: 500;
 }
 
-
-/* ===== MAIN ===== */
-
+/* ===== Main Layout ===== */
 main {
     max-width: 1000px;
     margin: 2rem auto;
@@ -85,119 +78,38 @@ section h2 {
     color: #1d5b8a;
 }
 
-
-/* ===== DASHBOARD ===== */
-
-.dashboard-card h2 {
-    margin-bottom: 1rem;
-    color: #1d5b8a;
-}
-
-.dashboard-card p {
-    color: #333;
-}
-
-
-/* ===== RINGKASAN ===== */
-
-.summary {
-    background-color: #fff;
-    padding: 1.5rem;
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 20px;
-    align-items: start;
-}
-
-.summary h2 {
-    margin: 0;
-    color: #1d5b8a;
-}
-
-.summary-stats {
+/* ===== Kartu Statistik (CSS Grid) ===== */
+main section:nth-of-type(2) {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    width: 100%;
+    gap: 1rem;
 }
 
-.stat-card {
+main section:nth-of-type(2) article {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+}
+
+main section:nth-of-type(2) article {
     background-color: #eef4fa;
-    border-radius: 6px;
-    padding: 25px 15px;
+    border-radius: 8px;
+    padding: 1.25rem;
     text-align: center;
-    width: 100%;
 }
 
-.stat-card h3 {
-    font-size: 0.9rem;
+main section:nth-of-type(2) article h3 {
+    font-size: 0.95rem;
     color: #55677a;
-    margin-bottom: 8px;
-    font-weight: 600;
+    margin-bottom: 0.5rem;
 }
 
-.stat-number {
-    font-size: 1.5rem;
+main section:nth-of-type(2) article p {
+    font-size: 1.8rem;
     font-weight: 700;
     color: #1d5b8a;
 }
 
-
-/* ===== PEMINJAMAN ===== */
-
-.peminjaman-card {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 2rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-}
-
-.peminjaman-card h2 {
-    color: #4caf7d;
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-}
-
-.peminjaman-card p {
-    margin-bottom: 1.5rem;
-}
-
-.peminjaman-card label {
-    display: block;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #444;
-    margin-bottom: 0.5rem;
-}
-
-.peminjaman-card select {
-    width: 540px;
-    max-width: 100%;
-    padding: 0.8rem 1rem;
-    border: 1px solid #cdd4da;
-    border-radius: 6px;
-    font-size: 1rem;
-    background-color: #fff;
-}
-
-.peminjaman-card button[type="submit"] {
-    background-color: #4caf7d;
-    color: #fff;
-    border: none;
-    padding: 0.8rem 2rem;
-    border-radius: 6px;
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-.peminjaman-card button[type="submit"]:hover {
-    background-color: #3d996b;
-}
-
-
-/* ===== TABEL ===== */
-
+/* ===== Tabel ===== */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -211,7 +123,7 @@ td {
 }
 
 thead {
-    background-color: #4caf7d;
+    background-color: #1d5b8a;
     color: #fff;
 }
 
@@ -223,9 +135,6 @@ tbody tr:hover {
     background-color: #eef4fa;
 }
 
-
-/* ===== BUTTON TABEL ===== */
-
 td button {
     padding: 0.35rem 0.7rem;
     margin-right: 0.35rem;
@@ -235,8 +144,7 @@ td button {
     font-size: 0.85rem;
 }
 
-td button:first-of-type,
-td a.btn-edit {
+td button:first-of-type {
     background-color: #f0ad4e;
     color: #fff;
 }
@@ -246,73 +154,7 @@ td button:last-of-type {
     color: #fff;
 }
 
-td a.btn-edit {
-    display: inline-block;
-    padding: 0.35rem 0.7rem;
-    margin-right: 0.35rem;
-    border-radius: 4px;
-    font-size: 0.85rem;
-}
-
-td form.form-hapus {
-    display: inline;
-}
-
-
-/* ===== PAGINATION ===== */
-
-.pagination {
-    display: flex;
-    gap: 0.5rem;
-    margin-top: 1rem;
-}
-
-.pagination a {
-    padding: 0.4rem 0.75rem;
-    border: 1px solid #cdd4da;
-    border-radius: 4px;
-    color: #1d5b8a;
-}
-
-.pagination a.active {
-    background-color: #1d5b8a;
-    color: #fff;
-    border-color: #1d5b8a;
-}
-
-
-/* ===== SEARCH ===== */
-
-.search-box {
-    margin-bottom: 1rem;
-}
-
-.search-box form {
-    display: flex;
-    gap: 0.5rem;
-    align-items: flex-end;
-}
-
-.search-box input {
-    width: 100%;
-    max-width: 320px;
-    padding: 0.5rem 0.75rem;
-    border: 1px solid #cdd4da;
-    border-radius: 4px;
-}
-
-.search-box button {
-    padding: 0.55rem 1.2rem;
-    border: none;
-    border-radius: 4px;
-    background-color: #4caf7d;
-    color: #fff;
-    cursor: pointer;
-}
-
-
-/* ===== FORM ===== */
-
+/* ===== Form ===== */
 form p {
     margin-bottom: 1rem;
 }
@@ -334,8 +176,26 @@ form select {
     font-size: 1rem;
 }
 
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.remember-me label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.remember-me input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+}
+
 form button[type="submit"] {
-    background-color: #4caf7d;
+    background-color: #1d5b8a;
     color: #fff;
     border: none;
     padding: 0.6rem 1.5rem;
@@ -345,12 +205,10 @@ form button[type="submit"] {
 }
 
 form button[type="submit"]:hover {
-    background-color: #3d996b;
+    background-color: #164869;
 }
 
-
-/* ===== FOOTER ===== */
-
+/* ===== Footer ===== */
 footer {
     text-align: center;
     padding: 1.25rem;
@@ -358,16 +216,12 @@ footer {
     font-size: 0.9rem;
 }
 
-
-/* ===== RESPONSIVE TABLE ===== */
-
+/* ===== Tabel Responsif ===== */
 .table-responsive {
     overflow-x: auto;
 }
 
-
-/* ===== HAMBURGER ===== */
-
+/* ===== Hamburger Menu (JS-driven) ===== */
 .nav-toggle-label {
     display: none;
     font-size: 1.6rem;
@@ -377,9 +231,7 @@ footer {
     cursor: pointer;
 }
 
-
-/* ===== FLASH MESSAGE ===== */
-
+/* ===== Flash Message ===== */
 .flash {
     padding: 0.75rem 1rem;
     border-radius: 6px;
@@ -397,9 +249,7 @@ footer {
     color: #721c24;
 }
 
-
-/* ===== ERROR ===== */
-
+/* ===== Pesan Error Validasi ===== */
 .error {
     display: block;
     color: #d9534f;
@@ -407,34 +257,30 @@ footer {
     margin-top: 0.25rem;
 }
 
-
-/* ===== RESPONSIVE ===== */
-
-@media (max-width: 768px) {
-
-    main {
-        padding: 0 1rem;
-    }
-
-    .summary {
-        grid-template-columns: 1fr;
-    }
-
-    .summary-stats {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    header nav ul {
-        gap: 0.7rem;
-    }
-
+/* ===== Kolom Pencarian ===== */
+.search-box {
+    margin-bottom: 1rem;
 }
 
+.search-box input {
+    width: 100%;
+    max-width: 320px;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #cdd4da;
+    border-radius: 4px;
+}
 
-/* ===== MOBILE ===== */
+/* ===== Responsive Breakpoints ===== */
 
+/* Tablet ke bawah */
+@media (max-width: 768px) {
+    main section:nth-of-type(2) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile */
 @media (max-width: 480px) {
-
     header {
         position: relative;
     }
@@ -459,7 +305,7 @@ footer {
         gap: 0.75rem;
     }
 
-    .summary-stats {
+    main section:nth-of-type(2) {
         grid-template-columns: 1fr;
     }
 
@@ -467,21 +313,86 @@ footer {
     form select {
         max-width: 100%;
     }
+}
 
-    .stat-card {
-        padding: 15px;
+/* ===== Pagination (Kotak Nomor Halaman) ===== */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin: 1.5rem 0;
+}
+
+.pagination a,
+.pagination span {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid #cdd4da;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #1d5b8a;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.pagination a:hover {
+    background-color: #eef4fa;
+    border-color: #1d5b8a;
+    text-decoration: none;
+}
+
+.pagination a.active,
+.pagination span.active {
+    background-color: #1d5b8a;
+    border-color: #1d5b8a;
+    color: #fff;
+    font-weight: 600;
+}
+
+/* ===== Kartu Statistik (CSS Grid) ===== */
+main section:nth-of-type(2) {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+main section:nth-of-type(2) article {
+    grid-column: auto;
+    background-color: #eef4fa;
+    border: 1px solid #dce6ef;
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+main section:nth-of-type(2) article h3 {
+    font-size: 0.95rem;
+    color: #55677a;
+    margin-bottom: 0.5rem;
+}
+
+main section:nth-of-type(2) article p {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1d5b8a;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    main section:nth-of-type(2) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+}
 
-    .stat-number {
-        font-size: 1.2rem;
+/* HP */
+@media (max-width: 480px) {
+    main section:nth-of-type(2) {
+        grid-template-columns: 1fr;
     }
-
-    .peminjaman-card {
-        padding: 1.5rem;
-    }
-
-    .peminjaman-card h2 {
-        font-size: 1.5rem;
-    }
-
 }
