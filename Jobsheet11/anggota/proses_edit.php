@@ -1,39 +1,44 @@
 <?php
-
 require __DIR__ . '/../includes/auth.php';
 require __DIR__ . '/../includes/csrf.php';
+
+if ($_SESSION['role'] !== 'admin') {
+    $_SESSION['flash'] = [
+        'type' => 'error',
+        'pesan' => 'Akses ditolak. Hanya admin yang boleh mengedit anggota.'
+    ];
+    header('Location: list.php');
+    exit;
+}
+
 require __DIR__ . '/../includes/koneksi.php';
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Location: list.php');
+    exit;
+}
 
 csrf_verify();
 
-$id = $_POST['id'] ?? '';
-$judul = trim($_POST['judul'] ?? '');
-$pengarang = trim($_POST['pengarang'] ?? '');
-$tahun = $_POST['tahun'] ?? '';
-$isbn = trim($_POST['isbn'] ?? '');
-$stok = $_POST['stok'] ?? '';
-$kategori = trim($_POST['kategori'] ?? '');
+$id = $_POST['id'] ?? null;
+$nama = trim($_POST['nama'] ?? '');
+$noAnggota = trim($_POST['no_anggota'] ?? '');
+$alamat = trim($_POST['alamat'] ?? '');
+$noHp = trim($_POST['no_hp'] ?? '');
+
+if (!$id) {
+    header('Location: list.php');
+    exit;
+}
 
 $errors = [];
 
-if (!is_numeric($id)) {
-    $errors[] = "ID buku tidak valid.";
+if ($nama === '') {
+    $errors[] = "Nama wajib diisi.";
 }
 
-if ($judul === '') {
-    $errors[] = "Judul wajib diisi.";
-}
-
-if ($pengarang === '') {
-    $errors[] = "Pengarang wajib diisi.";
-}
-
-if (!is_numeric($tahun) || $tahun < 1900 || $tahun > 2026) {
-    $errors[] = "Tahun harus di antara 1900-2026.";
-}
-
-if (!is_numeric($stok) || $stok < 0) {
-    $errors[] = "Stok tidak boleh negatif.";
+if ($noAnggota === '') {
+    $errors[] = "No. Anggota wajib diisi.";
 }
 
 if (!empty($errors)) {
@@ -42,34 +47,26 @@ if (!empty($errors)) {
         'pesan' => implode(' ', $errors)
     ];
 
-    header('Location: edit.php?id=' . (int) $id);
+    header('Location: edit.php?id=' . urlencode($id));
     exit;
 }
 
 $stmt = $pdo->prepare(
-    "UPDATE buku
-     SET judul = :judul,
-         pengarang = :pengarang,
-         tahun = :tahun,
-         isbn = :isbn,
-         stok = :stok,
-         kategori = :kategori
-     WHERE id = :id"
+    "UPDATE anggota SET nama = :nama, no_anggota = :no_anggota,
+     alamat = :alamat, no_hp = :no_hp WHERE id = :id"
 );
 
 $stmt->execute([
-    'judul' => $judul,
-    'pengarang' => $pengarang,
-    'tahun' => (int) $tahun,
-    'isbn' => $isbn,
-    'stok' => (int) $stok,
-    'kategori' => $kategori,
-    'id' => (int) $id
+    'nama' => $nama,
+    'no_anggota' => $noAnggota,
+    'alamat' => $alamat,
+    'no_hp' => $noHp,
+    'id' => $id,
 ]);
 
 $_SESSION['flash'] = [
     'type' => 'success',
-    'pesan' => 'Buku berhasil diperbarui.'
+    'pesan' => 'Anggota berhasil diperbarui.'
 ];
 
 header('Location: list.php');

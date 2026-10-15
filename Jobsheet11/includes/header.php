@@ -1,5 +1,4 @@
 <?php
-
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -9,78 +8,75 @@ require_once __DIR__ . '/csrf.php';
 
 $sudahLogin = isset($_SESSION['user_id']);
 
+// Prefix relatif ke root proyek ini
+$__jobsheetRoot = dirname(__DIR__);
+$__scriptDir = dirname($_SERVER['SCRIPT_FILENAME']);
+$__rel = ltrim(str_replace('\\', '/', substr($__scriptDir, strlen($__jobsheetRoot))), '/');
+$base = $__rel === '' ? '' : str_repeat('../', substr_count($__rel, '/') + 1);
 ?>
-
 <!DOCTYPE html>
 <html lang="id">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>
-        <?php
-        echo isset($page_title)
-            ? e($page_title)
-            : 'SIMPUS-Mini';
-        ?>
-    </title>
-
-    <link rel="stylesheet" href="/assets/css/style.css">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SIMPUS-Mini<?php echo isset($page_title) ? ' | ' . $page_title : ''; ?></title>
+    <link rel="stylesheet" href="<?php echo $base; ?>assets/css/style.css">
 </head>
 
 <body>
+    <header>
+        <h1>SIMPUS-Mini</h1>
 
-<header>
+        <button type="button" id="nav-toggle-btn" class="nav-toggle-label" aria-label="Menu">
+            &#9776;
+        </button>
 
-    <h1>SIMPUS-Mini</h1>
+        <nav>
+            <ul>
+                <li>
+                    <a href="<?php echo $base; ?>index.php">Beranda</a>
+                </li>
 
-    <nav>
+                <li>
+                    <a href="<?php echo $base; ?>buku/list.php">Daftar Buku</a>
+                </li>
 
-        <a href="/index.php">
-            Beranda
-        </a>
+                <?php if ($sudahLogin): ?>
 
-        <a href="/buku/list.php">
-            Daftar Buku
-        </a>
+                    <li>
+                        <a href="<?php echo $base; ?>buku/tambah.php">Tambah Buku</a>
+                    </li>
 
-        <?php if ($sudahLogin): ?>
+                    <li>
+                        <a href="<?php echo $base; ?>anggota/list.php">Daftar Anggota</a>
+                    </li>
 
-            <a href="/anggota/list.php">
-                Daftar Anggota
-            </a>
+                    <li>
+                        <a href="<?php echo $base; ?>anggota/tambah.php">Tambah Anggota</a>
+                    </li>
 
-        <?php endif; ?>
+                <?php endif; ?>
+            </ul>
+        </nav>
 
-    </nav>
+        <div class="auth-status">
+            <?php if ($sudahLogin): ?>
 
-    <div class="auth-status">
+                <span><?php echo e($_SESSION['nama']); ?></span>
 
-        <?php if ($sudahLogin): ?>
+                <a href="<?php echo $base; ?>auth/logout.php">
+                    Logout
+                </a>
 
-            <span>
-                Petugas:
-                <?php echo e($_SESSION['nama'] ?? ''); ?>
-            </span>
+            <?php else: ?>
 
-            <a href="/auth/logout.php">
-                Logout
-            </a>
+                <a href="<?php echo $base; ?>auth/login.php">
+                    Login
+                </a>
 
-        <?php else: ?>
+            <?php endif; ?>
+        </div>
+    </header>
 
-            <a href="/auth/login.php">
-                Login
-            </a>
-
-        <?php endif; ?>
-
-    </div>
-
-</header>
-
-<main>
+    <main>

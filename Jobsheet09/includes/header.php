@@ -19,7 +19,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <?= htmlspecialchars($page_title ?? 'SIMPUS-Mini'); ?>
     </title>
 
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 
 </head>
 

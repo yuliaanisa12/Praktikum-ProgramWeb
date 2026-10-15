@@ -1,12 +1,16 @@
 <?php
-
 require __DIR__ . '/../includes/auth.php';
 require __DIR__ . '/../includes/csrf.php';
 require __DIR__ . '/../includes/koneksi.php';
 
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Location: list.php');
+    exit;
+}
+
 csrf_verify();
 
-$id = $_POST['id'] ?? '';
+$id = $_POST['id'] ?? null;
 $judul = trim($_POST['judul'] ?? '');
 $pengarang = trim($_POST['pengarang'] ?? '');
 $tahun = $_POST['tahun'] ?? '';
@@ -14,11 +18,12 @@ $isbn = trim($_POST['isbn'] ?? '');
 $stok = $_POST['stok'] ?? '';
 $kategori = trim($_POST['kategori'] ?? '');
 
-$errors = [];
-
-if (!is_numeric($id)) {
-    $errors[] = "ID buku tidak valid.";
+if (!$id) {
+    header('Location: list.php');
+    exit;
 }
+
+$errors = [];
 
 if ($judul === '') {
     $errors[] = "Judul wajib diisi.";
@@ -42,19 +47,13 @@ if (!empty($errors)) {
         'pesan' => implode(' ', $errors)
     ];
 
-    header('Location: edit.php?id=' . (int) $id);
+    header('Location: edit.php?id=' . urlencode($id));
     exit;
 }
 
 $stmt = $pdo->prepare(
-    "UPDATE buku
-     SET judul = :judul,
-         pengarang = :pengarang,
-         tahun = :tahun,
-         isbn = :isbn,
-         stok = :stok,
-         kategori = :kategori
-     WHERE id = :id"
+    "UPDATE buku SET judul = :judul, pengarang = :pengarang, tahun = :tahun,
+     isbn = :isbn, stok = :stok, kategori = :kategori WHERE id = :id"
 );
 
 $stmt->execute([
@@ -64,7 +63,7 @@ $stmt->execute([
     'isbn' => $isbn,
     'stok' => (int) $stok,
     'kategori' => $kategori,
-    'id' => (int) $id
+    'id' => $id,
 ]);
 
 $_SESSION['flash'] = [

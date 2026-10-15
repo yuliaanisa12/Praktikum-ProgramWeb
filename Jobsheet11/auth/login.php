@@ -1,112 +1,49 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+if (isset($_SESSION['user_id'])) {
+    header('Location: ../index.php');
+    exit;
+}
 
-$page_title = "Login Petugas";
+$page_title = "Login";
+include __DIR__ . '/../includes/header.php';
 
-require_once __DIR__ . '/../includes/header.php';
-
-$error = $_SESSION['login_error'] ?? null;
-
-unset($_SESSION['login_error']);
-
+$flash = $_SESSION['flash'] ?? null;
+unset($_SESSION['flash']);
 ?>
-
-<section class="auth-card">
-
+<section>
     <h2>Login Petugas</h2>
 
-    <?php if ($error): ?>
-
-        <div class="alert alert-danger">
-            <?php echo e($error); ?>
-        </div>
-
+    <?php if ($flash): ?>
+        <p class="flash flash-<?php echo $flash['type']; ?>"><?php echo e($flash['pesan']); ?></p>
     <?php endif; ?>
 
-
-    <form action="/auth/proses_login.php" method="POST">
-
+    <form method="post" action="proses_login.php">
         <?php echo csrf_field(); ?>
 
+        <p>
+            <label for="username">Username</label><br>
+            <input type="text" id="username" name="username" required>
+        </p>
 
-        <!-- Username -->
+        <p>
+            <label for="password">Password</label><br>
+            <input type="password" id="password" name="password" required>
+        </p>
 
-        <div class="form-group">
-
-            <label for="username">
-                Username
-            </label>
-
-            <input
-                type="text"
-                id="username"
-                name="username"
-                value="<?php echo e($_POST['username'] ?? ''); ?>"
-                required
-                autofocus
-            >
-
-        </div>
-
-
-        <!-- Password -->
-
-        <div class="form-group">
-
-            <label for="password">
-                Password
-            </label>
-
-            <input
-                type="password"
-                id="password"
-                name="password"
-                required
-            >
-
-        </div>
-
-
-        <!-- Ingat Saya -->
-
-        <div class="remember">
-
-            <input
-                type="checkbox"
-                id="ingat"
-                name="ingat"
-            >
-
-            <label for="ingat">
+        <p class="remember-me">
+            <label>
+                <input type="checkbox" name="remember" value="1">
                 Ingat Saya
             </label>
+        </p>
 
-        </div>
-
-
-        <!-- Tombol -->
-
-        <button type="submit">
-            Masuk
-        </button>
-
+        <p>
+            <button type="submit">Masuk</button>
+        </p>
     </form>
-
-
-    <div class="register-link">
-
-        Belum punya akun?
-
-        <a href="/auth/register.php">
-            Daftar di sini
-        </a>
-
-    </div>
-
+    <p>Belum punya akun? <a href="register.php">Daftar di sini</a></p>
 </section>
-
-
-<?php
-
-require_once __DIR__ . '/../includes/footer.php';
-
-?>
+<?php include __DIR__ . '/../includes/footer.php'; ?>

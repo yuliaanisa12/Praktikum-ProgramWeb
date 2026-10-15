@@ -1,23 +1,20 @@
 <?php
 
-$host = 'localhost';
-$port = '5432';
-$dbname = 'simpus_mini';
-$user = 'postgres';
-$password = '123456';
+$host = "localhost";
+$port = "5432";
+$db   = "simpus_mini";
+$user = "postgres";
+$pass = "123456";
 
 try {
     $pdo = new PDO(
-        "pgsql:host=$host;port=$port;dbname=$dbname",
+        "pgsql:host=$host;port=$port;dbname=$db",
         $user,
-        $password
+        $pass
     );
 
-    $pdo->setAttribute(
-        PDO::ATTR_ERRMODE,
-        PDO::ERRMODE_EXCEPTION
-    );
-
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
 } catch (PDOException $e) {
-    die("Koneksi database gagal: " . $e->getMessage());
+    echo "KONEKSI GAGAL: " . $e->getMessage();
 }

@@ -1,96 +1,56 @@
 <?php
-
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-if (isset($_SESSION['user_id'])) {
-    header('Location: ../index.php');
+require __DIR__ . '/../includes/csrf.php';
+require __DIR__ . '/../includes/koneksi.php';
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Location: register.php');
     exit;
 }
 
-$page_title = "Registrasi Petugas";
+csrf_verify();
 
-include __DIR__ . '/../includes/header.php';
+$nama = trim($_POST['nama'] ?? '');
+$username = trim($_POST['username'] ?? '');
+$password = $_POST['password'] ?? '';
 
-$flash = $_SESSION['flash'] ?? null;
-unset($_SESSION['flash']);
-?>
+$errors = [];
+if ($nama === '') {
+    $errors[] = "Nama wajib diisi.";
+}
+if ($username === '') {
+    $errors[] = "Username wajib diisi.";
+}
+if (strlen($password) < 6) {
+    $errors[] = "Password minimal 6 karakter.";
+}
 
-<section>
+if (!empty($errors)) {
+    $_SESSION['flash'] = ['type' => 'error', 'pesan' => implode(' ', $errors)];
+    header('Location: register.php');
+    exit;
+}
 
-    <h2>Registrasi Petugas</h2>
+$cek = $pdo->prepare("SELECT id FROM users WHERE username = :username");
+$cek->execute(['username' => $username]);
+if ($cek->fetch()) {
+    $_SESSION['flash'] = ['type' => 'error', 'pesan' => 'Username sudah digunakan.'];
+    header('Location: register.php');
+    exit;
+}
 
-    <?php if ($flash): ?>
+$stmt = $pdo->prepare(
+    "INSERT INTO users (nama, username, password, role) VALUES (:nama, :username, :password, 'petugas')"
+);
+$stmt->execute([
+    'nama' => $nama,
+    'username' => $username,
+    'password' => password_hash($password, PASSWORD_DEFAULT),
+]);
 
-        <p class="flash flash-<?php echo e($flash['type']); ?>">
-            <?php echo e($flash['pesan']); ?>
-        </p>
-
-    <?php endif; ?>
-
-    <form method="post" action="proses_register.php">
-
-        <?php echo csrf_field(); ?>
-
-        <p>
-            <label for="nama">
-                Nama
-            </label>
-            <br>
-
-            <input
-                type="text"
-                id="nama"
-                name="nama"
-                required
-            >
-        </p>
-
-        <p>
-            <label for="username">
-                Username
-            </label>
-            <br>
-
-            <input
-                type="text"
-                id="username"
-                name="username"
-                required
-            >
-        </p>
-
-        <p>
-            <label for="password">
-                Password
-            </label>
-            <br>
-
-            <input
-                type="password"
-                id="password"
-                name="password"
-                required
-                minlength="6"
-            >
-        </p>
-
-        <p>
-            <button type="submit">
-                Daftar
-            </button>
-        </p>
-
-    </form>
-
-    <p>
-        Sudah punya akun?
-        <a href="login.php">
-            Login di sini
-        </a>
-    </p>
-
-</section>
-
-<?php include __DIR__ . '/../includes/footer.php'; ?>
+$_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Registrasi berhasil, silakan login.'];
+header('Location: login.php');
+exit;

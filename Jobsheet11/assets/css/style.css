@@ -1,5 +1,4 @@
 /* ===== Reset & Base ===== */
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -22,18 +21,14 @@ a:hover {
     text-decoration: underline;
 }
 
-
-/* ===== Header & Navbar ===== */
-
+/* ===== Header & Navbar (Flexbox) ===== */
 header {
     background-color: #1d5b8a;
     color: #fff;
     padding: 1rem 1.5rem;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     flex-wrap: wrap;
 }
 
@@ -43,7 +38,6 @@ header h1 {
 
 header nav ul {
     list-style: none;
-
     display: flex;
     gap: 1.25rem;
 }
@@ -53,36 +47,29 @@ header nav a {
     font-weight: 500;
 }
 
-.auth-status {
+auth-status {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
-.auth-status span,
 .auth-status a {
     color: #fff;
     font-weight: 500;
 }
 
-
 /* ===== Main Layout ===== */
-
 main {
     max-width: 1000px;
     margin: 2rem auto;
     padding: 0 1.5rem;
 }
 
-
-/* ===== Section ===== */
-
 section {
     background-color: #fff;
     border-radius: 8px;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
-
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
@@ -91,107 +78,38 @@ section h2 {
     color: #1d5b8a;
 }
 
-
-/* ========================================
-   BERANDA
-======================================== */
-
-.dashboard-card {
-    background-color: #ffffff;
-    padding: 20px;
-    margin-bottom: 15px;
-
-    border-radius: 6px;
-
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-}
-
-.dashboard-card h2 {
-    margin-bottom: 8px;
-    color: #1d5b8a;
-    font-size: 16px;
-}
-
-.dashboard-card p {
-    color: #555;
-    font-size: 12px;
-}
-
-
-/* ========================================
-   RINGKASAN
-======================================== */
-
-.summary {
-    background-color: #ffffff;
-    padding: 20px;
-    margin-bottom: 15px;
-
-    border-radius: 6px;
-
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-}
-
-.summary h2 {
-    margin-bottom: 15px;
-    color: #1d5b8a;
-    font-size: 16px;
-}
-
-
-/* ===== 3 Kolom Ringkasan ===== */
-
-.summary-stats {
+/* ===== Kartu Statistik (CSS Grid) ===== */
+main section:nth-of-type(2) {
     display: grid;
-
     grid-template-columns: repeat(3, 1fr);
-
-    gap: 15px;
-
-    width: 100%;
+    gap: 1rem;
 }
 
+main section:nth-of-type(2) article {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+}
 
-/* ===== Kartu Statistik ===== */
-
-.stat-card {
+main section:nth-of-type(2) article {
     background-color: #eef4fa;
-
-    border: 1px solid #d9e3ec;
-    border-radius: 6px;
-
-    padding: 18px 10px;
-
-    min-height: 100px;
-
+    border-radius: 8px;
+    padding: 1.25rem;
     text-align: center;
-
-    display: flex;
-    flex-direction: column;
-
-    justify-content: center;
-    align-items: center;
 }
 
-.stat-card h3 {
-    margin: 0 0 8px 0;
-
+main section:nth-of-type(2) article h3 {
+    font-size: 0.95rem;
     color: #55677a;
-
-    font-size: 12px;
-    font-weight: 600;
+    margin-bottom: 0.5rem;
 }
 
-.stat-number {
-    color: #1d5b8a;
-
-    font-size: 24px;
+main section:nth-of-type(2) article p {
+    font-size: 1.8rem;
     font-weight: 700;
+    color: #1d5b8a;
 }
-
 
 /* ===== Tabel ===== */
-
 table {
     width: 100%;
     border-collapse: collapse;
@@ -200,9 +118,7 @@ table {
 th,
 td {
     text-align: left;
-
     padding: 0.65rem 0.75rem;
-
     border-bottom: 1px solid #e2e6ea;
 }
 
@@ -221,14 +137,10 @@ tbody tr:hover {
 
 td button {
     padding: 0.35rem 0.7rem;
-
     margin-right: 0.35rem;
-
     border: none;
     border-radius: 4px;
-
     cursor: pointer;
-
     font-size: 0.85rem;
 }
 
@@ -242,28 +154,15 @@ td button:last-of-type {
     color: #fff;
 }
 
-
-/* ===== Tabel Responsif ===== */
-
-.table-responsive {
-    width: 100%;
-    overflow-x: auto;
-}
-
-
 /* ===== Form ===== */
-
 form p {
     margin-bottom: 1rem;
 }
 
 form label {
     display: block;
-
     margin-bottom: 0.35rem;
-
     font-weight: 600;
-
     color: #444;
 }
 
@@ -271,27 +170,37 @@ form input,
 form select {
     width: 100%;
     max-width: 400px;
-
     padding: 0.55rem 0.7rem;
-
     border: 1px solid #cdd4da;
     border-radius: 4px;
-
     font-size: 1rem;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.remember-me label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.remember-me input[type="checkbox"] {
+    width: auto;
+    margin: 0;
 }
 
 form button[type="submit"] {
     background-color: #1d5b8a;
-
     color: #fff;
-
     border: none;
-    border-radius: 4px;
-
     padding: 0.6rem 1.5rem;
-
+    border-radius: 4px;
     font-size: 1rem;
-
     cursor: pointer;
 }
 
@@ -299,256 +208,56 @@ form button[type="submit"]:hover {
     background-color: #164869;
 }
 
-
-/* ========================================
-   LOGIN PETUGAS
-======================================== */
-
-.auth-card {
-    width: 360px;
-
-    margin: 25px auto;
-
-    padding: 20px;
-
-    background-color: #ffffff;
-
-    border-radius: 5px;
-
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
-
+/* ===== Footer ===== */
+footer {
     text-align: center;
+    padding: 1.25rem;
+    color: #7a8794;
+    font-size: 0.9rem;
 }
 
-.auth-card h2 {
-    margin: 0 0 15px 0;
-
-    color: #1d5b8a;
-
-    font-size: 16px;
-    font-weight: 700;
+/* ===== Tabel Responsif ===== */
+.table-responsive {
+    overflow-x: auto;
 }
 
-.auth-card form {
-    margin: 0;
-}
-
-.auth-card .form-group {
-    margin-bottom: 10px;
-
-    text-align: left;
-}
-
-.auth-card .form-group label {
-    display: block;
-
-    margin-bottom: 4px;
-
-    color: #444;
-
-    font-size: 10px;
-    font-weight: 500;
-}
-
-.auth-card .form-group input {
-    display: block;
-
-    width: 100%;
-    height: 30px;
-
-    padding: 5px 8px;
-
-    border: 1px solid #cdd4da;
-
-    border-radius: 3px;
-
-    background-color: #e8f0fb;
-
-    font-family: "Segoe UI", Arial, sans-serif;
-
-    font-size: 11px;
-}
-
-.auth-card .form-group input:focus {
-    outline: none;
-
-    border-color: #1d5b8a;
-
-    background-color: #ffffff;
-}
-
-
-/* ========================================
-   INGAT SAYA
-======================================== */
-
-.auth-card .remember {
-    display: flex;
-
-    justify-content: flex-start;
-    align-items: center;
-
-    gap: 5px;
-
-    margin: 5px 0 12px 0;
-
-    text-align: left;
-}
-
-.auth-card .remember input {
-    width: 11px;
-    height: 11px;
-
-    margin: 0;
-}
-
-.auth-card .remember label {
-    margin: 0;
-
-    color: #555;
-
-    font-size: 10px;
-
-    font-weight: 400;
-}
-
-
-/* ===== Remember Me Umum ===== */
-
-.remember-me {
-    display: flex;
-
-    align-items: center;
-
-    gap: 6px;
-}
-
-.remember-me input[type="checkbox"] {
-    width: auto;
-
-    margin: 0;
-}
-
-
-/* ========================================
-   TOMBOL LOGIN
-======================================== */
-
-.auth-card button[type="submit"] {
-    padding: 6px 15px;
-
+/* ===== Hamburger Menu (JS-driven) ===== */
+.nav-toggle-label {
+    display: none;
+    font-size: 1.6rem;
+    color: #fff;
+    background: none;
     border: none;
-
-    border-radius: 3px;
-
-    background-color: #1d5b8a;
-
-    color: #ffffff;
-
-    font-family: "Segoe UI", Arial, sans-serif;
-
-    font-size: 10px;
-
     cursor: pointer;
 }
 
-.auth-card button[type="submit"]:hover {
-    background-color: #164869;
-}
-
-
-/* ========================================
-   LINK DAFTAR
-======================================== */
-
-.auth-card .register-link {
-    margin-top: 12px;
-
-    color: #555;
-
-    font-size: 10px;
-}
-
-.auth-card .register-link a {
-    color: #1d5b8a;
-
-    font-size: 10px;
-
-    text-decoration: none;
-}
-
-.auth-card .register-link a:hover {
-    text-decoration: underline;
-}
-
-
-/* ========================================
-   ERROR LOGIN
-======================================== */
-
-.auth-card .alert {
-    margin-bottom: 10px;
-
-    padding: 6px 8px;
-
-    border-radius: 3px;
-
-    font-size: 10px;
-}
-
-.auth-card .alert-danger {
-    background-color: #f8d7da;
-
-    color: #721c24;
-}
-
-
-/* ========================================
-   FLASH MESSAGE
-======================================== */
-
+/* ===== Flash Message ===== */
 .flash {
     padding: 0.75rem 1rem;
-
     border-radius: 6px;
-
     margin-bottom: 1rem;
-
     font-weight: 500;
 }
 
 .flash-success {
     background-color: #d4edda;
-
     color: #155724;
 }
 
 .flash-error {
     background-color: #f8d7da;
-
     color: #721c24;
 }
 
-
-/* ========================================
-   PESAN ERROR VALIDASI
-======================================== */
-
+/* ===== Pesan Error Validasi ===== */
 .error {
     display: block;
-
     color: #d9534f;
-
     font-size: 0.85rem;
-
     margin-top: 0.25rem;
 }
 
-
-/* ========================================
-   KOLOM PENCARIAN
-======================================== */
-
+/* ===== Kolom Pencarian ===== */
 .search-box {
     margin-bottom: 1rem;
 }
@@ -556,133 +265,22 @@ form button[type="submit"]:hover {
 .search-box input {
     width: 100%;
     max-width: 320px;
-
     padding: 0.5rem 0.75rem;
-
     border: 1px solid #cdd4da;
-
     border-radius: 4px;
 }
 
+/* ===== Responsive Breakpoints ===== */
 
-/* ========================================
-   PAGINATION
-======================================== */
-
-.pagination {
-    display: flex;
-
-    gap: 8px;
-
-    margin-top: 1.25rem;
-
-    padding: 0;
-}
-
-.pagination a {
-    width: 40px;
-    height: 40px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border: 1px solid #cdd4da;
-
-    border-radius: 6px;
-
-    background-color: #fff;
-
-    color: #1d5b8a;
-
-    text-decoration: none;
-
-    font-weight: 600;
-
-    font-size: 0.95rem;
-}
-
-.pagination a:hover {
-    background-color: #eef4fa;
-
-    text-decoration: none;
-}
-
-.pagination a.active {
-    background-color: #1d5b8a;
-
-    color: #fff;
-
-    border-color: #1d5b8a;
-}
-
-
-/* ========================================
-   FOOTER
-======================================== */
-
-footer {
-    text-align: center;
-
-    padding: 1.25rem;
-
-    color: #7a8794;
-
-    font-size: 0.9rem;
-}
-
-
-/* ========================================
-   HAMBURGER MENU
-======================================== */
-
-.nav-toggle-label {
-    display: none;
-
-    font-size: 1.6rem;
-
-    color: #fff;
-
-    background: none;
-
-    border: none;
-
-    cursor: pointer;
-}
-
-
-/* ========================================
-   RESPONSIVE - TABLET
-======================================== */
-
+/* Tablet ke bawah */
 @media (max-width: 768px) {
-
-    main {
-        width: 100%;
-
-        padding: 0 1rem;
-    }
-
-    .summary-stats {
+    main section:nth-of-type(2) {
         grid-template-columns: repeat(2, 1fr);
     }
-
-    .auth-card {
-        width: 90%;
-
-        max-width: 360px;
-    }
-
 }
 
-
-/* ========================================
-   RESPONSIVE - MOBILE
-======================================== */
-
+/* Mobile */
 @media (max-width: 480px) {
-
     header {
         position: relative;
     }
@@ -693,11 +291,8 @@ footer {
 
     header nav {
         display: none;
-
         width: 100%;
-
         order: 3;
-
         margin-top: 1rem;
     }
 
@@ -707,11 +302,10 @@ footer {
 
     header nav ul {
         flex-direction: column;
-
         gap: 0.75rem;
     }
 
-    .summary-stats {
+    main section:nth-of-type(2) {
         grid-template-columns: 1fr;
     }
 
@@ -719,13 +313,86 @@ footer {
     form select {
         max-width: 100%;
     }
+}
 
-    .auth-card {
-        width: 100%;
+/* ===== Pagination (Kotak Nomor Halaman) ===== */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin: 1.5rem 0;
+}
+
+.pagination a,
+.pagination span {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid #cdd4da;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #1d5b8a;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.pagination a:hover {
+    background-color: #eef4fa;
+    border-color: #1d5b8a;
+    text-decoration: none;
+}
+
+.pagination a.active,
+.pagination span.active {
+    background-color: #1d5b8a;
+    border-color: #1d5b8a;
+    color: #fff;
+    font-weight: 600;
+}
+
+/* ===== Kartu Statistik (CSS Grid) ===== */
+main section:nth-of-type(2) {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+main section:nth-of-type(2) article {
+    grid-column: auto;
+    background-color: #eef4fa;
+    border: 1px solid #dce6ef;
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+main section:nth-of-type(2) article h3 {
+    font-size: 0.95rem;
+    color: #55677a;
+    margin-bottom: 0.5rem;
+}
+
+main section:nth-of-type(2) article p {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1d5b8a;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    main section:nth-of-type(2) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+}
 
-    .table-responsive {
-        overflow-x: auto;
+/* HP */
+@media (max-width: 480px) {
+    main section:nth-of-type(2) {
+        grid-template-columns: 1fr;
     }
-
 }
